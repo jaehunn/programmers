@@ -1,4 +1,3 @@
-// wip
 function solution(dartResult) {
   const t = {
     S: 1,
@@ -22,5 +21,3 @@ function solution(dartResult) {
 
   return r.reduce((s, v) => (s += v), 0);
 }
-
-console.log(solution("1D2S3T*"));
