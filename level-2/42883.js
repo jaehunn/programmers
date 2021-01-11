@@ -1,4 +1,6 @@
 function solution(number, k) {
+  if (number.length === 1) return number;
+
   let stk = [];
 
   // number order
@@ -12,6 +14,8 @@ function solution(number, k) {
 
     stk.push(+c);
   }
+
+  k && stk.splice(stk.length - k, k);
 
   return stk.join("");
 }
