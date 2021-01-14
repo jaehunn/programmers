@@ -1,9 +1,8 @@
-// wip
 function solution(numbers) {
-  return getAllNum(Array.from(numbers)).filter((l) => isPrime(l)).length;
+  return getAllNums(Array.from(numbers)).filter((l) => isPrime(l)).length;
 }
 
-function getAllNum(nums) {
+function getAllNums(nums) {
   let res = [];
 
   makeNumbers("", nums, res);
