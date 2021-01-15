@@ -1,9 +1,8 @@
-// wip
 function solution(p) {
-  let r = "";
-  let o = 0;
-  let c = 0;
-  let f = true;
+  let r = ""; // result
+  let o = 0; // open
+  let c = 0; // close
+  let f = true; // flag
 
   if (p.length === 0) return "";
 
