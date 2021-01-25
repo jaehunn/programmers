@@ -1,43 +1,33 @@
-// wip
-function solution(exp, l = exp.length) {
-  const h = {
-    1: [["+"], ["-"], ["*"]],
-    2: [
-      ["+", "-"],
-      ["-", "+"],
-      ["*", "-"],
-      ["-", "*"],
-      ["+", "*"],
-      ["*", "+"],
-    ],
-    3: [
-      ["+", "-", "*"],
-      ["+", "*", "-"],
-      ["-", "+", "*"],
-      ["-", "*", "+"],
-      ["*", "-", "+"],
-      ["*", "+", "-"],
-    ],
-  };
+function solution(exp) {
+  const opsSet = [
+    ["-", "*", "+"],
+    ["-", "+", "*"],
+    ["*", "-", "+"],
+    ["*", "+", "-"],
+    ["+", "-", "*"],
+    ["+", "*", "-"],
+  ];
 
-  let opnd = exp.split(/[^0-9]/g);
-  let ops = exp.split(/[+|*|-]/g);
-  let opss = h[ops.length]; // type
+  let r = [];
+  for (let ops of opsSet) {
+    let _exp = exp.split(/(\D)/); // separate
 
-  let res = 0;
-  let opndStk = [];
-  let opsStk = [];
-  while (1) {
-      // ...
-      opndStk.push(opnd[]);
-      opsStk.push(ops[]);
+    for (let op of ops) {
+      while (~_exp.indexOf(op)) {
+        let i = _exp.indexOf(op); // find operator index
+
+        let v = operation(_exp.slice(i - 1, i + 2)); // calculate
+
+        _exp.splice(i - 1, 3, v); // replace
+      }
+    }
+
+    r.push(Math.abs(_exp[0]));
   }
 
-  return res;
+  return Math.max(...r);
 }
 
-function operation(...r) {
-  return new Function(`return ${r[0]}${r[1]}${r[2]}; `)();
+function operation(exp) {
+  return new Function(`return ${exp[0]}${exp[1]}${exp[2]};`)();
 }
-
-solution("50*6-3*2");
