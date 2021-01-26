@@ -13,8 +13,10 @@ function solution(exp) {
     let _exp = exp.split(/(\D)/); // separate
 
     for (let op of ops) {
-      while (~_exp.indexOf(op)) {
+      while (1) {
         let i = _exp.indexOf(op); // find operator index
+
+        if (~i) break; // guard
 
         let v = operation(_exp.slice(i - 1, i + 2)); // calculate
 
