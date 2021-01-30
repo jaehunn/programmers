@@ -17,5 +17,3 @@ function solution(n, a, b) {
 
   return r;
 }
-
-console.log(solution(8, 4, 7));
