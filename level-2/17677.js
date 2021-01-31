@@ -4,12 +4,11 @@ function solution(s1, s2) {
   let _s2 = sets(nomalize(s2));
 
   // filter
-  _s1 = _s1.filter((s) => /^[a-zA-z]*$/.test(s));
-  _s2 = _s2.filter((s) => /^[a-zA-z]*$/.test(s));
+  _s1 = _s1.filter((s) => /^[a-zA-Z]*$/.test(s));
+  _s2 = _s2.filter((s) => /^[a-zA-Z]*$/.test(s));
 
-  let total = _s1.length + _s2.length;
+  let uni = _s1.length + _s2.length;
 
-  // AND
   let and = 0;
   while (_s1.length && _s2.length) {
     let c = _s1.shift();
@@ -22,7 +21,9 @@ function solution(s1, s2) {
     }
   }
 
-  let or = total - and;
+  let or = uni - and;
+
+  if (or === 0) return 65536;
 
   return res(and / or);
 }
