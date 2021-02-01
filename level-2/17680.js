@@ -1,47 +1,35 @@
-// wip
 function solution(l, cities) {
-  let r = 0; // latency
+  if (l === 0) return cities.length * 5;
 
-  // normalized
-  let S = cities.map((s) => s.toLowerCase());
+  let C = cities.map((s) => s.toLowerCase()); // normalize
 
-  // wip
-  let c = []; // data
-  let h = []; // hits
+  let q = []; // queue
 
-  for (let i = 0; i < S.length; i += 1) {
-    let s = S[i];
+  let r = 0;
+  for (let c of C) {
+    let qI = q.indexOf(c);
 
-    // miss: +5, swap
-    if (!c[s]) {
-      if (c.length >= l) {
-        // ... lru logic
-        let i = h.indexOf(Math.min(...h));
+    // hits
+    if (~qI) {
+      q.splice(qI, 1);
 
-        c[i] = s;
-        h[i] = 1;
-      } else {
-        c.push(s);
-        h.push(1);
-      }
-
-      r += 5;
-    } else {
-      // hit: +1, up hits
-      let i = c.indexOf(s);
-
-      h[i] += 1;
+      q.push(c);
 
       r += 1;
-    }
+    } else {
+      // miss
+      if (q.length >= l) q.shift();
 
-    console.log(c, h, r);
+      q.push(c);
+
+      r += 5;
+    }
   }
 
   return r;
 }
 
-solution(3, [
+solution(5, [
   "Jeju",
   "Pangyo",
   "Seoul",
