@@ -1,51 +1,61 @@
 // wip
 function solution(m, n, A) {
-  const R = A.length;
-  const C = A[0].length;
-
-  let M = Array(R)
+  // lexical
+  let M = Array(A.length)
     .fill()
     .map((row, i) => Array.from(A[i]));
 
-  let N = Array(R)
-    .fill()
-    .map(() => Array(C).fill(1));
+  return helper();
 
-  for (let i = 1; i < R; i += 1) {
-    for (let j = 1; j < C; j += 1) {
-      let c = M[i][j];
+  function helper(N = []) {
+    // find
+    for (let i = 1; i < M.length; i += 1) {
+      for (let j = 1; j < M[0].length; j += 1) {
+        let c = M[i][j];
 
-      if (M[i - 1][j - 1] === c && M[i - 1][j] === c && M[i][j - 1] === c) {
-        N[i - 1][j - 1] = 0;
-        N[i - 1][j] = 0;
-        N[i][j - 1] = 0;
+        if (M[i - 1][j - 1] === c && M[i - 1][j] === c && M[i][j - 1] === c)
+          N.push([i, j]);
       }
     }
-  }
 
-  // sort
-  let rI = 0;
-  let cI = 0;
-  while (rI < R && cI < C) {
-    // find one
-    if (N[rI][cI] === 1) {
-      // find zero
-      let i = R - 1;
-      while (N[i][cI]) i -= 1;
+    // break
+    if (!N.length) return [...M].filter((v) => v === "").length; // ""(empty) remove
 
-      console.log(N, i);
+    // set
+    for (let pos of N) {
+      const [row, col] = pos;
 
-      // swap
-      //      if (i > rI)
-
-      rI += 1;
+      M[row - 1][row - 1] = 0;
+      M[row][col - 1] = 0;
+      M[row - 1][col] = 0;
+      M[row][col] = 0;
     }
 
-    cI += 1;
+    // sort
+    for (let i = 0; i < M[0].length; i += 1) {
+      let j = 0;
+      let k = M.length - 1;
+
+      while (1) {
+        while (M[j][i]) j += 1; // find one
+        while (M[k][i]) k -= 1; // find zero
+
+        console.log(i, j, k);
+
+        // j - 1: one
+        // i: zero
+        if (j === 0) break;
+
+        [M[j - 1][i], M[k][i]] = [M[k][i], M[j - 1][i]];
+
+        j = 0;
+        console.log(M);
+      }
+    }
   }
 }
 
 // m	n	board	                        answer
 // 4	5	[CCBDE, AAADE, AAABF, CCBBF]	14
 
-solution(4, 5, ["CCBDE", "AAADE", "AAABF", "CCBBF"]);
+console.log(solution(4, 5, ["CCBDE", "AAADE", "AAABF", "CCBBF"]));
