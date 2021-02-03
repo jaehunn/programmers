@@ -28,18 +28,3 @@ function solution(l, cities) {
 
   return r;
 }
-
-solution(5, [
-  "Jeju",
-  "Pangyo",
-  "Seoul",
-  "NewYork",
-  "LA",
-  "SanFrancisco",
-  "Seoul",
-  "Rome",
-  "Paris",
-  "Jeju",
-  "NewYork",
-  "Rome",
-]);
