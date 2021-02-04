@@ -1,22 +1,11 @@
+// wip
+// bit manipulation
 function solution(relation) {
-  let r = 0;
+  let cL = relation[0].length;
 
-  for (let j = 0; j < relation[0].length; j += 1) {
-    let o = {};
-    let c = [];
+  let l = 1 << cL;
 
-    for (let i = 0; i < relation.length; i += 1) {
-      let t = relation[i][j];
-
-      // ... wip
-    }
-
-    if (Object.keys(o).length === relation.length) r += 1;
-
-    console.log(o, r, c);
-  }
-
-  return r;
+  // ...
 }
 
 solution([
