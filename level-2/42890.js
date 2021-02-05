@@ -1,11 +1,28 @@
 // wip
-// bit manipulation
 function solution(relation) {
-  let cL = relation[0].length;
+  let cols = relation[0].length;
 
-  let l = 1 << cL;
+  let l = 1 << cols;
+  let r = new Set();
+  for (let i = 1; i < l; i += 1) {
+    let _relation = relation.map((row) =>
+      row.filter((s, j) => i & (1 << j)).join("")
+    );
 
-  // ...
+    let c = new Set(_relation);
+
+    if (_relation.length === c.size) r.add(i);
+  }
+
+  for (let x of r) {
+    for (let y of r) {
+      if (x === y) continue;
+
+      if ((x & y) === x) r.delete(y); // and 는 최소한의 1만을 남긴다
+    }
+  }
+
+  return r.size;
 }
 
 solution([
