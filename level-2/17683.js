@@ -1,42 +1,27 @@
 // wip
 function solution(word, infos) {
-  let _infos = infos.map((s) => s.split(","));
+  let _word = word.replace(/(\D)#/g, (s, c) => c.toLowerCase());
 
-  let r = [];
-  for (let info of _infos) {
-    let time = getTime(info[0], info[1]);
-    let title = info[2];
-    let text = info[3];
+  let _infos = infos.map((info) => {
+    let _info = info.split(",");
+    let text = _info[3].replace(/(\D)#/g, (s, c) => c.toLowerCase());
 
-    let c = [];
-    let s = "";
+    return [_info[2], getConvertText(getTime(_info[0], _info[1]), text)];
+  });
 
-    if (time >= text.length) {
-      for (let i = 0; i < (time / text.length) << 0; i += 1) {
-        s += text;
-      }
-
-      for (let i = 0; i < time % text.length; i += 1) {
-        s += text[i];
-      }
-    } else s = text;
-
-    for (let i = 0; i < s.length; i += 1) {
-      let _s = "";
-
-      for (let j = 0; j < time; j += 1) {
-        if (i + j > s.length) {
-          // 문자열이 끝에 다다랐을떄 어떻게 앞에서부터 다시시작할까
-        }
-      }
-
-      c.push(_s);
+  let r = _infos.reduce((r, _info) => {
+    if (~_info[1].indexOf(_word)) {
+      if (!r.length || r[1].length < _info[1].length) return _info; // update
     }
 
-    r.push(c);
-  }
+    return r;
+  }, []);
 
-  console.log(r);
+  return r.length ? r[0] : "(None)";
+}
+
+function getConvertText(t, text) {
+  return text.repeat(t / text.length) + text.substring(0, t % text.length);
 }
 
 function getTime(a, b) {
@@ -57,5 +42,3 @@ function getTime(a, b) {
 
   return r;
 }
-
-solution("ABCDEFG", ["12:00,12:14,HELLO,CDEFGABA", "13:00,13:05,WORLD,ABCDEF"]);
