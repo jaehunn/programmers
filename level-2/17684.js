@@ -43,23 +43,16 @@ function solution(word) {
       else sI = text[s];
     }
 
-    if (s.length > 1) {
+    if (!text[s]) {
       text[s] = textI;
 
       textI += 1;
 
-      i += s.length - 1; // KAO -> KA -> KA index
-    }
-
-    console.log(text, r);
-
-    // last off 'one'
-    if (i === word.length) break;
+      i += s.length - 2; // back
+    } else i += s.length - 1;
 
     r.push(sI);
   }
 
   return r;
 }
-
-solution("KAKAO");
