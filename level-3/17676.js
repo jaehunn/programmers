@@ -1,4 +1,3 @@
-// wip
 function solution(lines) {
   // data
   let _lines = lines.map((line) => getMs(line)); // [{S,E}, {S,E} ...]
@@ -12,10 +11,9 @@ function solution(lines) {
     let c = 0;
     _lines.forEach(({ reqS: s, reqE: e }) => {
       if (
-        (s <= S && e >= E) || // 1. over
-        (S <= e && e <= E) || // 2. left
-        (S <= s && s <= E) || // 3. right
-        (S <= s && e <= E) // 4. between
+        (e <= E && e >= S) || // left
+        (s <= E && s >= S) || // right
+        (s <= S && e >= E) // over
       )
         c += 1;
     });
@@ -33,7 +31,7 @@ function getMs(line) {
 
   let [h, m, s] = S;
 
-  let reqE = (h * 3600 + m * 60 + s) * 1000; // s -> ms
+  let reqE = (+h * 3600 + +m * 60 + +s) * 1000;
   let reqS = reqE - T + 1; // T = end - start + 1;
 
   return { reqS, reqE };
