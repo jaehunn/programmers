@@ -19,5 +19,3 @@ function solution(n, t, m, p) {
 
   return r;
 }
-
-solution(16, 16, 2, 1);
