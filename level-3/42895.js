@@ -1,26 +1,31 @@
-// 1 11 111 1111
-// N NN NNN NNNN
-// N 2N 3N 4N
-// etc
-
 // wip
 function solution(N, number) {
-  let r = Array(number + 1).fill(0);
+  let r = -1;
 
-  for (let i = 1, j = 2, k = 1; i <= number; i += 1) {
-    if ((i / N) << 0 === k) {
-      // ...
-    } else if (!(i % N)) {
-      r[i] = i / N;
-    } else if (i === k) {
-      r[i] = j;
+  dfs();
 
-      j += 1;
-      k = k * 10 + 1; // 1 11 111...
-    } else r[i] = r[i - 1] + 1;
+  return r;
+
+  function dfs(exp = 0, cur = 0) {
+    if (exp > 8) return;
+
+    if (cur === number) {
+      if (r === -1 || exp < r) r = exp;
+
+      return;
+    }
+
+    let n = 0;
+
+    for (let i = 1; i <= 8; i += 1) {
+      n = n * 10 + N; // N NN NNN NNNN NNNNN...
+
+      dfs(exp + i, cur + n);
+      dfs(exp + i, cur - n);
+      dfs(exp + i, cur * n);
+      dfs(exp + i, cur / n);
+    }
   }
-
-  return r[number] > 8 ? -1 : r[number];
 }
 
-solution(5, 55);
+console.log(solution(5, 12));
