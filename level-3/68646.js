@@ -1,31 +1,10 @@
-// wip
-function solution(A, l = A.length) {
-  let r = [];
-  for (let i = 0; i < l; i += 1) {
-    let Ai = A.indexOf(A[i]);
+// 해당 원소를 기준으로 양옆 원소들은 큰것들이 모두 지워져 가장 작은 원소들만이 하나씩 남게된다. [min 원소 min]
+// 해당 원소 인덱스가 1이 넘어가면 작은 원소가 2개 이상이되어 지울수없어 답의 후보가 되지않는다.
 
-    let p = helper(A.slice(0, Ai));
-    let q = helper(A.slice(Ai + 1, A.length));
+// 시간을 줄일 방법은?
 
-    if (p || q) r.push(A[i]);
-  }
-
-  return r;
+function solution(A) {
+  // wip
 }
 
-function helper(items) {
-  let i = 0;
-  while (i < items.length) {
-    if (items[i] < items[i + 1]) items.splice(i, 1);
-    else items.splice(i + 1, 1);
-
-    i += 1;
-  }
-
-  console.log(items);
-
-  return items.length <= 1;
-}
-
-// [-16 27 65 -2 58 -92 -71 -68 -61 -33]
-// []
+console.log(solution([-16, 27, 65, -2, 58, -92, -71, -68, -61, -33]));
