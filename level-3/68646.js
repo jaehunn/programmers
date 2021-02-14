@@ -1,10 +1,17 @@
-// 해당 원소를 기준으로 양옆 원소들은 큰것들이 모두 지워져 가장 작은 원소들만이 하나씩 남게된다. [min 원소 min]
-// 해당 원소 인덱스가 1이 넘어가면 작은 원소가 2개 이상이되어 지울수없어 답의 후보가 되지않는다.
+function solution(A, len = A.length) {
+  if (len < 3) return len;
 
-// 시간을 줄일 방법은?
+  let l = Infinity;
+  let r = Infinity;
 
-function solution(A) {
-  // wip
+  let o = {};
+  for (let i = 0; i < len; i += 1) {
+    if (l > A[i]) l = A[i];
+    if (r > A[len - 1 - i]) r = A[len - 1 - i];
+
+    if (!o[l]) o[l] = true;
+    if (!o[r]) o[r] = true;
+  }
+
+  return Object.keys(o).length;
 }
-
-console.log(solution([-16, 27, 65, -2, 58, -92, -71, -68, -61, -33]));
