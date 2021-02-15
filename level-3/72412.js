@@ -1,39 +1,9 @@
+// wip
 function solution(info, query) {
-  let h = {
-    java: 1,
-    python: 2,
-    cpp: 4,
-    backend: 8,
-    frontend: 16,
-    junior: 32,
-    senior: 64,
-    pizza: 128,
-    chicken: 256,
-  };
+  let b = ["java", "python", "cpp", "backend", "frontend", "junior", "senior", "pizza", "chicken"];
 
-  let _info = info.map((s) =>
-    s.split(" ").reduce(
-      (_s, v) => {
-        if (h[v]) _s[0] += h[v];
-        else if (!isNaN(+v)) _s[1] += +v;
-
-        return _s;
-      },
-      [0, 0]
-    )
-  );
-
-  let _query = query.map((s) =>
-    s.split(" ").reduce(
-      (_s, v) => {
-        if (h[v]) _s[0] += h[v];
-        else if (!isNaN(+v)) _s[1] += +v;
-
-        return _s;
-      },
-      [0, 0]
-    )
-  );
+  let _info = cnv(info);
+  let _query = cnv(query);
 
   let res = [];
   _query.forEach((a) => {
@@ -49,6 +19,22 @@ function solution(info, query) {
   });
 
   return res;
+
+  function cnv(items) {
+    return items.map((s) =>
+      s.split(" ").reduce(
+        (_s, v) => {
+          let bI = b.indexOf(v);
+
+          if (~bI) _s[0] += 1 << bI;
+          else if (!isNaN(+v)) _s[1] += +v;
+
+          return _s;
+        },
+        [0, 0]
+      )
+    );
+  }
 }
 
 solution(
