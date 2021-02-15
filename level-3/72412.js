@@ -1,4 +1,3 @@
-// bit
 function solution(info, query) {
   let h = {
     java: 1,
@@ -15,8 +14,8 @@ function solution(info, query) {
   let _info = info.map((s) =>
     s.split(" ").reduce(
       (_s, v) => {
-        if (isNaN(v)) _s[0] += h[v];
-        else _s[1] += +v;
+        if (h[v]) _s[0] += h[v];
+        else if (!isNaN(+v)) _s[1] += +v;
 
         return _s;
       },
@@ -25,20 +24,15 @@ function solution(info, query) {
   );
 
   let _query = query.map((s) =>
-    s
-      .split(" ")
-      .filter((v) => v !== "and")
-      .reduce(
-        (_s, v) => {
-          if (v !== "-") {
-            if (isNaN(v)) _s[0] += h[v];
-            else _s[1] += +v;
-          }
+    s.split(" ").reduce(
+      (_s, v) => {
+        if (h[v]) _s[0] += h[v];
+        else if (!isNaN(+v)) _s[1] += +v;
 
-          return _s;
-        },
-        [0, 0]
-      )
+        return _s;
+      },
+      [0, 0]
+    )
   );
 
   let res = [];
@@ -46,13 +40,15 @@ function solution(info, query) {
     let c = 0;
 
     _info.forEach((b) => {
-      // wip
+      if (a[1] <= b[1]) {
+        if ((a[0] | b[0]) === b[0]) c += 1;
+      }
     });
 
     res.push(c);
   });
 
-  console.log(res);
+  return res;
 }
 
 solution(
