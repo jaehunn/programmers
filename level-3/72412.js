@@ -1,18 +1,58 @@
-// 정보를 어떻게 저장할것인가?
+// bit
 function solution(info, query) {
-  let h = {};
+  let h = {
+    java: 1,
+    python: 2,
+    cpp: 4,
+    backend: 8,
+    frontend: 16,
+    junior: 32,
+    senior: 64,
+    pizza: 128,
+    chicken: 256,
+  };
 
-  let _info = info.map((s) => s.split(" "));
-  let _query = query.map((s) => s.split(" ").filter((v) => v !== "and"));
+  let _info = info.map((s) =>
+    s.split(" ").reduce(
+      (_s, v) => {
+        if (isNaN(v)) _s[0] += h[v];
+        else _s[1] += +v;
 
-  _info.forEach((_s, i) => {
-    _s.forEach((v) => {
-      if (!h[v]) h[v] = [i + 1];
-      else h[v].push(i + 1);
+        return _s;
+      },
+      [0, 0]
+    )
+  );
+
+  let _query = query.map((s) =>
+    s
+      .split(" ")
+      .filter((v) => v !== "and")
+      .reduce(
+        (_s, v) => {
+          if (v !== "-") {
+            if (isNaN(v)) _s[0] += h[v];
+            else _s[1] += +v;
+          }
+
+          return _s;
+        },
+        [0, 0]
+      )
+  );
+
+  let res = [];
+  _query.forEach((a) => {
+    let c = 0;
+
+    _info.forEach((b) => {
+      // wip
     });
+
+    res.push(c);
   });
 
-  // wip
+  console.log(res);
 }
 
 solution(
