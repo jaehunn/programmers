@@ -1,40 +1,29 @@
 // wip
 function solution(info, query) {
-  let b = ["java", "python", "cpp", "backend", "frontend", "junior", "senior", "pizza", "chicken"];
+  let h = ["java", "python", "cpp", "backend", "frontend", "junior", "senior", "pizza", "chicken"];
 
-  let _info = cnv(info);
-  let _query = cnv(query);
+  // wip
+  let _info = info
+    .map((s) => s.split(" "))
+    .reduce((o, _s) => {
+      let k = _s.slice(0, _s.length - 1).reduce((r, v) => {
+        let hI = h.indexOf(v);
 
-  let res = [];
-  _query.forEach((a) => {
-    let c = 0;
+        r += 1 << hI;
 
-    _info.forEach((b) => {
-      if (a[1] <= b[1]) {
-        if ((a[0] | b[0]) === b[0]) c += 1;
-      }
-    });
+        return r;
+      }, 0);
 
-    res.push(c);
-  });
+      let v = _s[_s.length - 1];
 
-  return res;
+      o[k] = v;
 
-  function cnv(items) {
-    return items.map((s) =>
-      s.split(" ").reduce(
-        (_s, v) => {
-          let bI = b.indexOf(v);
+      return o;
+    }, {});
 
-          if (~bI) _s[0] += 1 << bI;
-          else if (!isNaN(+v)) _s[1] += +v;
+  let _query = query.map((s) => s.split(" "));
 
-          return _s;
-        },
-        [0, 0]
-      )
-    );
-  }
+  _query;
 }
 
 solution(
