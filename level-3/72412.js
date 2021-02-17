@@ -1,29 +1,33 @@
 // wip
 function solution(info, query) {
-  let h = ["java", "python", "cpp", "backend", "frontend", "junior", "senior", "pizza", "chicken"];
+  let h = { java: 1, python: 2, cpp: 4, backend: 8, frontend: 16, junior: 32, senior: 64, pizza: 128, chicken: 256 };
 
-  // wip
-  let _info = info
-    .map((s) => s.split(" "))
-    .reduce((o, _s) => {
-      let k = _s.slice(0, _s.length - 1).reduce((r, v) => {
-        let hI = h.indexOf(v);
+  let _info = [];
+  info.map((s) =>
+    s.split(" ").reduce((k, c, i, _s) => {
+      let o = {};
 
-        r += 1 << hI;
+      k += c;
 
-        return r;
-      }, 0);
+      if (i !== _s.length - 1) {
+        o["key"] = k;
+        o["value"] = +_s[_s.length - 1];
 
-      let v = _s[_s.length - 1];
+        _info.push(o);
+      }
 
-      o[k] = v;
+      return k;
+    }, "")
+  );
 
-      return o;
-    }, {});
+  _info.sort((a, b) => (a.value < b.value ? -1 : a.value > b.value ? 1 : 0));
 
-  let _query = query.map((s) => s.split(" "));
+  let res = [];
+  query.map((s) => {
+    // wip
+  });
 
-  _query;
+  console.log(res);
 }
 
 solution(
