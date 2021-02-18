@@ -1,33 +1,43 @@
 // wip
 function solution(info, query) {
-  let h = { java: 1, python: 2, cpp: 4, backend: 8, frontend: 16, junior: 32, senior: 64, pizza: 128, chicken: 256 };
+  let h = {
+    java: 1,
+    python: 2,
+    cpp: 4,
+    backend: 8,
+    frontend: 16,
+    junior: 32,
+    senior: 64,
+    pizza: 128,
+    chicken: 256,
+  };
 
-  let _info = [];
+  let _info = {};
   info.map((s) =>
-    s.split(" ").reduce((k, c, i, _s) => {
-      let o = {};
-
-      k += c;
-
-      if (i !== _s.length - 1) {
-        o["key"] = k;
-        o["value"] = +_s[_s.length - 1];
-
-        _info.push(o);
-      }
+    s.split(" ").reduce((k, c) => {
+      if (h[c]) {
+      } else _info[k] = [c];
 
       return k;
-    }, "")
+    }, 0)
   );
 
-  _info.sort((a, b) => (a.value < b.value ? -1 : a.value > b.value ? 1 : 0));
+  let _query = [];
+  query.map((s) =>
+    s.split(" ").reduce((k, c) => {
+      if (h[c]) k += h[c];
+      else if (!isNaN(+c)) _query.push([k, c]);
+
+      return k;
+    }, 0)
+  );
 
   let res = [];
-  query.map((s) => {
-    // wip
+  _query.forEach((a) => {
+    // ...
   });
 
-  console.log(res);
+  console.log(_query);
 }
 
 solution(
