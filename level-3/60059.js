@@ -1,7 +1,8 @@
+// wip
 function solution(key, lock) {
   let r = false;
 
-  // wip
+  //
 
   return r;
 }
