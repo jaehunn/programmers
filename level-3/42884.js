@@ -1,13 +1,13 @@
 // wip
 function solution(R) {
-  let _R = R.sort((a, b) => a[1] - b[1]);
+  R.sort((a, b) => a[1] - b[1]);
 
-  let res = [-30001];
-  _R.forEach((c) => {
-    if (res[res.length - 1] < c[0]) res.push(c[1]);
+  let r = [-30001];
+  R.forEach((c) => {
+    if (r[r.length - 1] < c[0]) r.push(c[1]);
   });
 
-  return res.length - 1;
+  return r.length - 1;
 }
 
 console.log(
