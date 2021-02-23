@@ -1,4 +1,4 @@
-// @see https://gmlwjd9405.github.io/2018/08/29/algorithm-kruskal-mst.html
+// kruskal(MST)
 function solution(n, E) {
   let R = new Array(n).fill().map((_, i) => i); // parent
 
