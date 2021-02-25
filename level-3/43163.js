@@ -1,52 +1,82 @@
-// wip
-// bfs, dfs
-function solution(s, e, W) {
-  if (!W.includes(e)) return 0;
+// 알파벳을 비트로 표현해 관계를 아는 것이 불가능하다. -> 중복되는 알파벳이 존재한다. (aaa: 3, aab: 4)
 
-  // lexical
-  const H = Array.from("abcdefghijklmnopqrstuvwxyz").reduce((H, v, i) => {
-    H[v] = 1 << i;
+// bfs
+function solution(begin, target, words) {
+  if (!words.includes(target)) return 0;
 
-    return H;
-  }, {});
+  let result = 0; // 답을 찾았을 때, 트리의 레벨이 결과가 된다.
+  let nextLevel = []; // 전부 비워야하는 순간이있다.
 
-  let r = 0; // level
+  const V = new Set(); // 방문한 노드를 체크해야한다.
+  const Q = [begin];
 
-  let V = new Set();
+  while (Q.length) {
+    const targetWord = Q.shift();
 
-  let c = []; // current level items
-  let q = [s]; // root
-  while (q.length) {
-    let v = q.shift();
+    V.add(targetWord);
 
-    V.add(v);
+    if (targetWord === target) return result;
 
-    if (v === e) return r;
+    // 방문하지않은 노드면서 알파벳이 하나만 다른 단어들을 찾는다.
+    for (let i = 0; i < targetWord.length; i += 1) {
+      let letter = splicedWord(targetWord, i);
+      let matched = words.filter((v) => !V.has(v) && splicedWord(v, i) === letter);
 
-    W.forEach((w) => {
-      if (!V.has(w) && isDiffOne(w, v)) c.push(w);
-    });
+      nextLevel.push(...matched);
+    }
 
-    if (!q.length) {
-      r += 1;
+    // 같은 레벨에 해당하는 단어들을 모두 순회했다면, 다음 레벨의 단어들을 큐에 복사한다.
+    if (!Q.length) {
+      result += 1;
 
-      q.push(...c);
-      c = [];
+      Q.push(...nextLevel);
+      nextLevel = [];
     }
   }
 
-  return r;
+  return result;
+}
 
-  function isDiffOne(a, b) {
-    let _a = strToNum(a);
-    let _b = strToNum(b);
+function splicedWord(word, i) {
+  const wordToArray = word.split("");
 
-    let res = _a & ~_b;
+  wordToArray.splice(i, 1);
 
-    return res === (res & -res); // isPower
-  }
+  return wordToArray.join("");
+}
 
-  function strToNum(s) {
-    return Array.from(s).reduce((r, v) => (r += H[v]), 0);
+// dfs
+function _solution(begin, target, words) {
+  if (!words.includes(target)) return 0;
+
+  let result = [];
+
+  dfs(begin, 0, 0, new Set());
+
+  return result.length ? Math.min(...result) : 0;
+
+  function dfs(targetWord, index, level, V) {
+    if (index >= words.length) return;
+
+    for (let i = 0; i < targetWord.length; i += 1) {
+      let letter = splicedWord(targetWord, i);
+      let matched = words.filter((v) => !V.has(v) && splicedWord(v, i) === letter);
+
+      if (matched.includes(target)) {
+        result.push(level + 1);
+
+        return;
+      }
+
+      matched.map((v, j) => {
+        const newV = new Set([...V]);
+
+        newV.add(v);
+
+        dfs(v, j, level + 1, newV);
+      });
+    }
   }
 }
+
+solution("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]);
