@@ -1,7 +1,5 @@
 // 알파벳을 비트로 표현해 관계를 아는 것이 불가능하다. -> 중복되는 알파벳이 존재한다. (aaa: 3, aab: 4)
 
-// wip
-
 // bfs
 function solution(begin, target, words) {
   if (!words.includes(target)) return 0;
@@ -53,8 +51,6 @@ function isOneDiff(word, other) {
 }
 
 // dfs
-function _solution(begin, target, words) {
-  // wip
-}
+// wip
 
 console.log(solution("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]));
