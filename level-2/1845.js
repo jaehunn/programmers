@@ -22,5 +22,3 @@ function solution(nums, n = nums.length) {
 
   return res;
 }
-
-console.log(solution([3, 1, 2, 3]));

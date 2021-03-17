@@ -1,6 +1,7 @@
 function solution(n) {
   let r = [0, 1];
 
+  // iteration
   let i = 2;
   while (i <= n) {
     r[i] = (r[i - 2] + r[i - 1]) % 1234567;

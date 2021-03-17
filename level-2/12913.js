@@ -1,6 +1,6 @@
 function solution(land) {
   for (let i = 1; i < land.length; i += 1) {
-    land[i] = max(land[i - 1], land[i]); // update (dp)
+    land[i] = max(land[i - 1], land[i]);
   }
 
   return Math.max(...land[land.length - 1]);
