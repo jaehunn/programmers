@@ -15,7 +15,6 @@ function solution(n, words) {
     i += 1;
   }
 
-  // no problem
   return [0, 0];
 
   function res(i) {

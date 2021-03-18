@@ -15,17 +15,15 @@ function combination(items, l) {
     });
   });
 
-  // [sum]
   return r.map((vs) => vs.reduce((t, v) => t + v, 0));
 }
 
 function isPrime(n) {
-  if (n === 1) return false; // 1
-  if (n === 2 || n === 3) return true; // 2, 3
+  if (n === 1) return false;
+  if (n === 2 || n === 3) return true;
   if (!(n % 2)) return false; // even
 
   for (let d = 3; d <= Math.sqrt(n); d += 2) {
-    // factor
     if (!(n % d)) return false;
   }
 

@@ -7,12 +7,7 @@ function solution(s) {
       let _s = "";
 
       s.split("").forEach((c, i) => {
-        _s +=
-          i === 0 && isNaN(+c) // first
-            ? c.toUpperCase()
-            : isNaN(+c) // not first + char
-            ? c.toLowerCase()
-            : (_s += c); // not first + int
+        _s += i === 0 && isNaN(+c) ? c.toUpperCase() : isNaN(+c) ? c.toLowerCase() : (_s += c);
       });
 
       return _s;

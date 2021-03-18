@@ -1,4 +1,3 @@
-// wip
 function solution(s1, s2) {
   let _s1 = sets(nomalize(s1));
   let _s2 = sets(nomalize(s2));
