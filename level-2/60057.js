@@ -9,10 +9,10 @@ function solution(s) {
     let _s = [pre];
     let _sI = 0;
 
-    // comp
+    // compression
     let cnt = 1;
     for (let i = l; i < s.length; i += l) {
-      let cur = s.substring(i, i + l); // (+rest string)
+      let cur = s.substring(i, i + l);
 
       if (pre === cur) _s[_sI] = ++cnt + cur;
       else {

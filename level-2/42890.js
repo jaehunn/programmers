@@ -1,4 +1,3 @@
-// wip
 function solution(relation) {
   let cols = relation[0].length;
 
@@ -18,7 +17,7 @@ function solution(relation) {
     for (let y of r) {
       if (x === y) continue;
 
-      if ((x & y) === x) r.delete(y); // and 는 최소한의 1만을 남긴다
+      if ((x & y) === x) r.delete(y); // AND logical operation
     }
   }
 

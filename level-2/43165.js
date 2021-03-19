@@ -1,5 +1,5 @@
 function solution(numbers, target) {
-  let res = 0; // scala value -> inner func
+  let res = 0; // lexical
   dfs(numbers, 0, target);
 
   return res;

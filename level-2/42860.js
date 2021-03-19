@@ -29,11 +29,15 @@ function solution(name) {
     Z: 1,
   };
 
-  // wip
-  // 매번 가까운 A 를 찾기 -> Greedy
-}
+  let stk = [];
+  for (const c of name) {
+    if (c === "A" && stk[stk.length - 1] === "A") stk.pop();
 
-console.log(solution("JABAAZ")); // 14, 13
-// JABAAZ 14
-// JABAZ 14
-// JABZ 13
+    stk.push(c);
+  }
+
+  // cursor
+  let r = stk[1] === "A" ? stk.length - 2 : stk.length - 1;
+
+  return stk.reduce((r, c) => (r += h[c]), r);
+}
