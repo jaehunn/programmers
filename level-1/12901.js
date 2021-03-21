@@ -1,21 +1,13 @@
-function solution(a, b) {
-  const h = {
-    0: "FRI",
-    1: "SAT",
-    2: "SUN",
-    3: "MON",
-    4: "TUE",
-    5: "WED",
-    6: "THU",
-  };
+function solution(month, days) {
+  const DAY = ["FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU"];
 
-  while (a > 1) {
-    a -= 1;
+  while (month > 1) {
+    month -= 1;
 
-    if (a === 2) b += 29;
-    else if (a === 4 || a === 6 || a === 9 || a === 11) b += 30;
-    else b += 31;
+    if (month === 2) days += 29;
+    else if (month === 4 || month === 6 || month === 9 || month === 11) days += 30;
+    else days += 31;
   }
 
-  return h[(b - 1) % 7];
+  return DAY[(days - 1) % 7];
 }

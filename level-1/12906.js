@@ -1,9 +1,16 @@
-function solution(arr) {
-  let stk = [];
-
-  for (let i = 0; i < arr.length; i += 1) {
-    if (stk.length === 0 || stk[stk.length - 1] !== arr[i]) stk.push(arr[i]);
+function solution(items, length = items.length) {
+  const stack = [];
+  for (let i = 0; i < length; i += 1) {
+    if (isEmpty(stack) || getTop(stack) !== items[i]) stack.push(items[i]);
   }
 
-  return stk;
+  return stack;
+}
+
+function isEmpty(stack) {
+  return stack.length === 0;
+}
+
+function getTop(stack) {
+  return stack[stack.length - 1];
 }

@@ -9,9 +9,6 @@ function solution(n) {
   let dys = [0, 1, -1];
   let dI = 0;
 
-  // n = 5)
-  // L = 5 + 4 + 3 + 2 + 1
-  // = n(n + 1) / 2
   let l = (n * (n + 1)) / 2;
 
   let i = 0;
@@ -23,7 +20,6 @@ function solution(n) {
 
     i += 1;
 
-    // check variable
     let _x = x + dxs[dI];
     let _y = y + dys[dI];
 

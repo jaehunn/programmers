@@ -1,5 +1,9 @@
-function solution(s) {
-  let midI = (s.length / 2) << 0;
+function solution(word, length = word.length) {
+  const midIndex = (length / 2) << 0;
 
-  return s.length % 2 ? s[midI] : s[midI - 1] + s[midI];
+  return isOdd(length) ? word.charAt(midIndex) : word.charAt(midIndex - 1) + word.charAt(midIndex);
+}
+
+function isOdd(num) {
+  return num % 2;
 }

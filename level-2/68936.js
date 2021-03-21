@@ -19,7 +19,7 @@ function helper(x, y, l, arr) {
 
   let [zero, one] = sum(tL, tR, bL, bR);
 
-  // all one OR zero
+  // all one OR all zero
   if (zero === 0 && one === 4) return [0, 1];
   else if (zero === 4 && one === 0) return [1, 0];
 
