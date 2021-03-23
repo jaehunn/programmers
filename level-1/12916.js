@@ -1,9 +1,10 @@
-function solution(s) {
-  let res = 0;
-  Array.from(s).forEach((v) => {
-    if (v === "p" || v === "P") res += 1;
-    else if (v === "y" || v === "Y") res -= 1;
+function solution(str) {
+  let result = 0;
+
+  Array.from(str).forEach((letter) => {
+    if (letter === "p" || letter === "P") result += 1;
+    else if (letter === "y" || letter === "Y") result -= 1;
   });
 
-  return !res;
+  return result === 0;
 }
