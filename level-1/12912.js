@@ -9,6 +9,6 @@ function solution(a, b) {
   return isEven(length) ? (a + b) * halfLength : (a + b) * halfLength + (a + halfLength);
 }
 
-function isEven(number) {
-  return number % 2 === 0;
+function isEven(num) {
+  return num % 2 === 0;
 }

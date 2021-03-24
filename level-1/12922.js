@@ -1,13 +1,10 @@
-function solution(n) {
-  if (n === 1) return "수";
+function solution(N) {
+  const Strs = ["수", "박"];
 
-  let str = "";
-  let d = (n / 2) << 0;
-  while (d) {
-    str += "수박";
-
-    d -= 1;
+  let result = "";
+  for (let i = 0; i < N; i += 1) {
+    result += Strs[i % 2];
   }
 
-  return n % 2 ? (str += "수") : str;
+  return result;
 }

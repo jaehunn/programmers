@@ -1,20 +1,20 @@
-function solution(n) {
-  let isP = new Array(n + 1).fill(true);
+function solution(N) {
+  let isPrimes = new Array(N + 1).fill(true);
 
-  isP[0] = false;
-  isP[1] = false;
+  isPrimes[0] = false;
+  isPrimes[1] = false;
 
-  for (let i = 2; i <= n; i += 1) {
-    if (isP[i]) {
-      let j = i * i;
+  for (let num = 2; num <= N; num += 1) {
+    if (isPrimes[num]) {
+      let squareNum = num * num;
 
-      while (j <= n) {
-        isP[j] = false;
+      while (squareNum <= N) {
+        isPrimes[squareNum] = false;
 
-        j += i;
+        squareNum += num; // multiple
       }
     }
   }
 
-  return isP.filter((v) => !!v).length;
+  return isPrimes.filter((isPrime) => isPrime).length;
 }

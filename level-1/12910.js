@@ -8,6 +8,6 @@ function isEmpty(items) {
   return items.length === 0;
 }
 
-function isFactor(number, factor) {
-  return number % factor === 0;
+function isFactor(num, factor) {
+  return num % factor === 0;
 }

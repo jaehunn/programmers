@@ -1,12 +1,18 @@
-function solution(n) {
-  let r = 0;
+function solution(N) {
+  if (N < 2) return N;
 
-  let i = 1;
-  while (i <= n) {
-    if (!(n % i)) r += i;
+  let result = 0;
 
-    i += 1;
+  let num = 1;
+  while (num <= N) {
+    if (isFactor(N, num)) result += num;
+
+    num += 1;
   }
 
-  return r;
+  return result;
+}
+
+function isFactor(num, factor) {
+  return num % factor === 0;
 }

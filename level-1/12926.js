@@ -1,29 +1,16 @@
-// A = 65, Z = 90
-// a = 97, z = 122
+function solution(str, num) {
+  const Alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-function solution(s, n) {
-  return Array.from(s)
-    .map((c) => {
-      if (c === " ") return c;
+  return Array.from(str)
+    .map((letter) => Alpha.indexOf(letter))
+    .map((letterIndex) => {
+      if (letterIndex === -1) return " ";
 
-      let cTn = c.charCodeAt();
-      let _cTn = cTn + n;
+      let index = (letterIndex + num) % 26;
 
-      // a-z
-      let t;
-      if (cTn <= 90 && _cTn > 90) {
-        t = _cTn - 90;
+      if (letterIndex > 25) index += 26; // z + 1 -> a
 
-        _cTn = t + 64;
-      } else if (_cTn > 122) {
-        t = _cTn - 122;
-
-        _cTn = t + 96;
-      }
-
-      return String.fromCharCode(_cTn);
+      return Alpha.charAt(index);
     })
     .join("");
 }
-
-console.log(solution("a b z", 1));
