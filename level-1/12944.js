@@ -1,8 +1,29 @@
 function solution(arr) {
-  let l = 0;
-  let r = arr.length - 1;
-  let s = 0;
-  while (l < r) s += arr[l++] + arr[r--];
+  const average = getAverage(arr);
 
-  return arr.length % 2 ? (s + arr[l]) / arr.length : s / arr.length;
+  return average;
+}
+
+function getAverage(arr, len = arr.length) {
+  const sum = getSum(arr);
+
+  return sum / len;
+}
+
+function getSum(arr) {
+  let sum = 0;
+
+  let startIndex = 0;
+  let endIndex = arr.length - 1;
+  while (startIndex < endIndex) {
+    sum += arr[startIndex] + arr[endIndex];
+
+    startIndex += 1;
+    endIndex -= 1;
+  }
+
+  // length is odd length
+  if (startIndex === endIndex) return (sum += arr[startIndex]);
+
+  return sum;
 }

@@ -1,10 +1,19 @@
 function solution(n, m) {
-  let _n = n;
-  let _m = m;
+  const gcd = getGCD(n, m);
+  const lcm = getLCM(n, m);
 
-  while (_n && _m && _n !== _m) {
-    [_n, _m] = _n > _m ? [_n - _m, _m] : [_n, _m - _n];
+  return [gcd, lcm];
+}
+
+function getGCD(a, b) {
+  while (a && b && a !== b) {
+    if (a > b) [a, b] = [a - b, b];
+    else [a, b] = [a, b - a];
   }
 
-  return [_n || _m, (n * m) / (_n || _m)];
+  return a || b;
+}
+
+function getLCM(a, b) {
+  return (a * b) / getGCD(a, b);
 }

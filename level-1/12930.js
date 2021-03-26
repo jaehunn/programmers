@@ -1,13 +1,20 @@
-function solution(s) {
-  return s
+function solution(str) {
+  return str
     .split(" ")
-    .map((w) => {
-      let _w = "";
-      for (let i = 0; i < w.length; i += 1) {
-        _w += i % 2 ? w.charAt(i).toLowerCase() : w.charAt(i).toUpperCase();
-      }
-
-      return _w;
-    })
+    .map((word) => convertWord(word))
     .join(" ");
+}
+
+function convertWord(word) {
+  let newWord = "";
+
+  for (let i = 0; i < word.length; i += 1) {
+    newWord += isEven(i) ? word.charAt(i).toUpperCase() : word.charAt(i).toLowerCase();
+  }
+
+  return newWord;
+}
+
+function isEven(num) {
+  return num % 2 === 0;
 }

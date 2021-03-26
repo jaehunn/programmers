@@ -1,3 +1,3 @@
-function solution(n) {
-  return Array.from(n + "").reduce((r, v) => (r += +v), 0);
+function solution(N) {
+  return Array.from(N + "").reduce((sum, num) => (sum += +num), 0);
 }

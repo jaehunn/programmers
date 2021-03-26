@@ -1,5 +1,5 @@
-function solution(n) {
-  let r = Math.sqrt(n);
+function solution(N) {
+  let n = Math.sqrt(N);
 
-  return Number.isInteger(r) ? Math.pow(r + 1, 2) : -1;
+  return Number.isInteger(n) ? Math.pow(n + 1, 2) : -1;
 }

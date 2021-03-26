@@ -1,11 +1,20 @@
-function solution(n) {
-  let r = [];
+function solution(N) {
+  let result = [];
 
-  while (n) {
-    r.push(n % 10);
+  let num = N;
+  while (num > 0) {
+    result.push(getLeastDigit(num));
 
-    n = (n / 10) << 0;
+    num = removeLeastDigit(num);
   }
 
-  return r;
+  return result;
+}
+
+function getLeastDigit(num) {
+  return num % 10;
+}
+
+function removeLeastDigit(num) {
+  return (num / 10) << 0;
 }
