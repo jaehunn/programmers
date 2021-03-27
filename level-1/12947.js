@@ -1,10 +1,20 @@
 function solution(x) {
-  let s = x + "";
+  let str = x + "";
 
-  let r = 0;
-  for (const n of s) {
-    r += +n;
+  const sum = getSum(str);
+
+  return isFactor(x, sum);
+}
+
+function getSum(str) {
+  let sum = 0;
+  for (const char of str) {
+    sum += +char;
   }
 
-  return x % r ? false : true;
+  return sum;
+}
+
+function isFactor(num, factor) {
+  return num % factor === 0;
 }
