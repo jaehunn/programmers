@@ -1,22 +1,31 @@
+// wip
 function solution(dartResult) {
-  const t = {
+  const Bonus = {
     S: 1,
     D: 2,
     T: 3,
   };
 
-  let r = [];
+  const Option = {
+    "*": 2,
+    "#": -1,
+  };
+
+  let result = [];
   let s = "";
-  dartResult.split("").forEach((v, i, l) => {
-    if (+v >= 0) s += v;
-    if (t[v]) {
-      r.push(Math.pow(+s, t[v]));
+  Array.from(dartResult).forEach((value, index, dataResult) => {
+    if (Bonus[value]) {
+      r.push(Math.pow(+s, Bonus[v]));
 
       s = "";
     }
 
-    if (v === "*") r = r.map((v, i) => (i >= r.length - 2 ? v * 2 : v));
-    if (v === "#") r[r.length - 1] *= -1;
+    if (Option[value]) {
+      if (v === "*") r = r.map((v, i) => (i >= r.length - 2 ? v * 2 : v));
+      if (v === "#") r[r.length - 1] *= -1;
+    } else {
+      s += v;
+    }
   });
 
   return r.reduce((s, v) => (s += v), 0);

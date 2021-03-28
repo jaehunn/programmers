@@ -1,9 +1,7 @@
 process.stdin.setEncoding("utf8");
 process.stdin.on("data", (data) => {
-  const n = data.split(" ");
-  const a = Number(n[0]);
-  const b = Number(n[1]);
+  const [Width, Height] = data.split(" ").map((value) => +value);
 
-  let s = Array(a).fill("*").join("");
-  for (let i = 0; i < b; i += 1) console.log(s);
+  const width = Array(Width).fill("*").join("");
+  for (let index = 0; index < Height; index += 1) console.log(width);
 });

@@ -1,13 +1,12 @@
-function solution(d, budget) {
-  d.sort((a, b) => a - b);
+function solution(D, budget) {
+  D.sort((a, b) => a - b);
 
-  let c = 0;
-  let i = 0;
-  while (d[i] <= budget) {
-    budget -= d[i++];
+  let index = 0;
+  while (D[index] <= budget) {
+    budget -= D[index];
 
-    c += 1;
+    index += 1;
   }
 
-  return c;
+  return index; // count
 }

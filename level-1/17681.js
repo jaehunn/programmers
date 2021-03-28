@@ -1,23 +1,17 @@
-// wip
-function solution(n, arr1, arr2) {
-  return Array(n)
+function solution(N, arr1, arr2) {
+  return Array(N)
     .fill(0)
-    .map((v, i) => arr1[i] | arr2[i])
-    .map((v) => {
-      let l = 2 ** n;
-      let s = v.toString(2);
+    .map((row, i) => arr1[i] | arr2[i]) // bit operation
+    .map((row) => {
+      let binaryRow = row.toString(2);
 
-      v > l;
+      while (binaryRow.length < N) binaryRow = "0" + binaryRow;
 
-      let r = "";
-      for (const c of s) {
-        r += c === "0" ? " " : "#";
+      let resultRow = "";
+      for (const block of binaryRow) {
+        resultRow += block === "0" ? " " : "#";
       }
 
-      while (r.length < n) {
-        r = v < l ? " " + r : r + " ";
-      }
-
-      return r;
+      return resultRow;
     });
 }

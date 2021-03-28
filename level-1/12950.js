@@ -1,19 +1,24 @@
 function solution(arr1, arr2) {
-  let r = [];
-  let i = 0;
-  while (i < arr1.length) {
-    let _r = [];
-    let j = 0;
-    while (j < arr1[i].length) {
-      _r.push(arr1[i][j] + arr2[i][j]);
+  const Row = arr1.length;
+  const Col = arr2[0].length;
 
-      j += 1;
+  let result = []; // Row X Col
+
+  let row = 0;
+  while (row < Row) {
+    let element = [];
+
+    let col = 0;
+    while (col < Col) {
+      element.push(arr1[row][col] + arr2[row][col]);
+
+      col += 1;
     }
 
-    r.push(_r);
+    result.push(element);
 
-    i += 1;
+    row += 1;
   }
 
-  return r;
+  return result;
 }

@@ -1,6 +1,7 @@
-function solution(x, n) {
-  let s = 0;
-  return Array(n)
+function solution(R, N) {
+  let num = 0;
+
+  return Array(N)
     .fill(0)
-    .map((v) => (v = s += x));
+    .map((n) => (n = num += R));
 }
