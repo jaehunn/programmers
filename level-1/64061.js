@@ -1,44 +1,50 @@
-// refactoring
-// move[i] -> board[top][i]
+// wip
 function solution(board, moves) {
-  let stk = [];
-  let res = 0;
+  let result = 0;
 
-  for (let move of moves) {
-    let col = move - 1;
+  let stack = [];
+  for (const move of moves) {
     let row = 0;
-    for (; row < board.length; row += 1) {
-      if (board[row][col] !== 0) break;
-    }
+    let col = move - 1;
 
-    let v;
-    if (row === board.length) v = 0;
-    else v = board[row][col];
+    const item = getItem(row, col);
 
-    if (v !== 0) {
-      if (stk.length === 0) stk.push(v);
-      else if (stk[stk.length - 1] === v) {
-        stk.pop();
+    if (isEmpty(item)) continue;
 
-        res += 2;
-      } else stk.push(v);
-
-      board[row][col] = 0;
-    }
+    pushStack(item);
   }
 
-  return res;
-}
+  return result;
 
-console.log(
-  solution(
-    [
-      [0, 0, 0, 0, 0],
-      [0, 0, 1, 0, 3],
-      [0, 2, 5, 0, 1],
-      [4, 2, 4, 4, 2],
-      [3, 5, 1, 3, 1],
-    ],
-    [1, 5, 3, 5, 1, 2, 1, 4]
-  )
-);
+  function pushStack(item) {
+    if (stack.length > 0 && stack[stack.length - 1] === item) {
+      stack.pop();
+
+      result += 2;
+    } else stack.push(item);
+  }
+
+  function getItem(row, col) {
+    for (; row < board.length; row += 1) {
+      if (board[row][col] > 0) {
+        const item = board[row][col];
+
+        setBoard(row, col, 0);
+
+        return item;
+      }
+    }
+
+    return 0;
+  }
+
+  function setBoard(row, col, value) {
+    board[row][col] = value;
+  }
+
+  function isEmpty(item) {
+    if (item === 0) return true;
+
+    return false;
+  }
+}

@@ -1,12 +1,20 @@
-function solution(N, stages, l = stages.length) {
+function solution(N, stages) {
   return Array(N)
     .fill(0)
-    .map((v, i) => {
-      let l = stages.length;
-      stages = stages.filter((s) => s > i + 1);
+    .map((_, stageIndex) => {
+      const originalLength = stages.length;
 
-      return { i: i + 1, v: (l - stages.length) / l };
+      stages = stages.filter((currentStage) => currentStage > stageIndex + 1); // mutate
+
+      const currentLength = stages.length;
+      const failureRate = (originalLength - currentLength) / originalLength;
+
+      return { stageIndex, failureRate };
     })
-    .sort((a, b) => (a.v == b.v ? a.i - b.i : b.v - a.v))
-    .map((v) => v.i);
+    .sort((a, b) => {
+      if (a.failureRate === b.failureRate) return a.stageIndex - b.stageIndex;
+
+      return b.failureRate - a.failureRate;
+    })
+    .map((value) => value.stageIndex + 1);
 }

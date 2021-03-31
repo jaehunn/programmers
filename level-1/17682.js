@@ -1,4 +1,3 @@
-// wip
 function solution(dartResult) {
   const Bonus = {
     S: 1,
@@ -6,27 +5,38 @@ function solution(dartResult) {
     T: 3,
   };
 
-  const Option = {
+  const Options = {
     "*": 2,
     "#": -1,
   };
 
-  let result = [];
-  let s = "";
-  Array.from(dartResult).forEach((value, index, dataResult) => {
+  let nums = []; // lexical
+  let currentAcc = "";
+
+  Array.from(dartResult).forEach((value) => {
+    if (Number.isInteger(+value)) currentAcc += value;
+
+    if (Options[value]) addOption(value);
+
     if (Bonus[value]) {
-      r.push(Math.pow(+s, Bonus[v]));
+      nums.push(addBonus(+currentAcc, value));
 
-      s = "";
-    }
-
-    if (Option[value]) {
-      if (v === "*") r = r.map((v, i) => (i >= r.length - 2 ? v * 2 : v));
-      if (v === "#") r[r.length - 1] *= -1;
-    } else {
-      s += v;
+      currentAcc = ""; // reset
     }
   });
 
-  return r.reduce((s, v) => (s += v), 0);
+  return getSum();
+
+  function addOption(key) {
+    if (key === "*") nums = nums.map((num, index) => (index >= nums.length - 2 ? num * 2 : num));
+    else nums[nums.length - 1] *= -1; // key is "#"
+  }
+
+  function addBonus(num, key) {
+    return Math.pow(num, Bonus[key]);
+  }
+
+  function getSum() {
+    return nums.reduce((total, num) => (total += num), 0);
+  }
 }
