@@ -1,3 +1,9 @@
+// toString(): number -> string
+// parseInt(): string -> number
+
 function solution(n) {
-  return parseInt([...n.toString(3)].reverse().join(""), 3);
+  const ternary = n.toString(3);
+  const reverseTernary = Array.from(ternary).reverse().join("");
+
+  return parseInt(reverseTernary, 3);
 }

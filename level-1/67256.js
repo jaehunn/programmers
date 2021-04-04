@@ -1,55 +1,47 @@
-// 1 2 3
-// 4 5 6
-// 7 8 9
-// * 0 #
-
-// [3, 0] [3, 2]
-// [0, 0] -> 3 vs. 5 -> l
-
-// [0,0]
-
 function solution(numbers, hand) {
-  let o = {
-    1: [0, 0],
-    2: [0, 1],
-    3: [0, 2],
-    4: [1, 0],
-    5: [1, 1],
-    6: [1, 2],
-    7: [2, 0],
-    8: [2, 1],
-    9: [2, 2],
-    0: [3, 1],
-  };
+  let result = "";
 
-  let l = [3, 0]; // *
-  let r = [3, 2]; // #
-  let ld = 0;
-  let rd = 0;
-  let res = "";
+  const padNumberLocationList = [
+    [3, 1], // 0
+    [0, 0], // 1
+    [0, 1], // 2
+    [0, 2], // 3
+    [1, 0], // 4
+    [1, 1], // 5
+    [1, 2], // 6
+    [2, 0], // 7
+    [2, 1], // 8
+    [2, 2], // 9
+  ];
 
-  numbers.forEach((v) => {
-    if (v === 1 || v === 4 || v === 7) res += "L";
-    else if (v === 3 || v === 6 || v === 9) res += "R";
+  let currentLeftLocation = [3, 0]; // *
+  let currentRightLocation = [3, 2]; // #
+  let leftDistance = 0;
+  let rightDistance = 0;
+
+  numbers.forEach((num) => {
+    if (num === 1 || num === 4 || num === 7) result += "L";
+    else if (num === 3 || num === 6 || num === 9) result += "R";
     else {
       // 2 5 8 0
-      ld = dist(l, o[v]);
-      rd = dist(r, o[v]);
+      leftDistance = getDistance(currentLeftLocation, padNumberLocationList[num]);
+      rightDistance = getDistance(currentRightLocation, padNumberLocationList[num]);
 
-      if (ld === rd) {
-        if (hand === "left") res += "L";
-        else res += "R";
-      } else if (ld > rd) res += "R";
-      else res += "L";
+      if (leftDistance === rightDistance) {
+        result += hand === "left" ? "L" : "R";
+      } else result += leftDistance > rightDistance ? "R" : "L";
     }
 
-    res.charAt(res.length - 1) === "L" ? (l = o[v]) : (r = o[v]);
+    if (result.charAt(result.length - 1) === "L") currentLeftLocation = padNumberLocationList[num];
+    else currentRightLocation = padNumberLocationList[num];
   });
 
-  return res;
+  return result;
 }
 
-// |eX - sX| + |eY - eX|
-function dist(s, e) {
-  return Math.abs(e[0] - s[0]) + Math.abs(e[1] - s[1]);
+function getDistance(a, b) {
+  const [aX, aY] = a;
+  const [bX, bY] = b;
+
+  return Math.abs(bX - aX) + Math.abs(bY - aY);
 }

@@ -1,9 +1,8 @@
-function solution(a, b) {
-  let r = 0;
-
-  for (let i = 0; i < a.length; i += 1) {
-    r += a[i] * b[i];
+function solution(a, b, len = a.length) {
+  let innerProduct = 0;
+  for (let i = 0; i < len; i += 1) {
+    innerProduct += a[i] * b[i];
   }
 
-  return r;
+  return innerProduct;
 }

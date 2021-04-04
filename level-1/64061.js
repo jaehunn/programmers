@@ -1,50 +1,41 @@
-// wip
 function solution(board, moves) {
   let result = 0;
 
-  let stack = [];
+  let bucket = [];
   for (const move of moves) {
     let row = 0;
     let col = move - 1;
 
     const item = getItem(row, col);
 
-    if (isEmpty(item)) continue;
+    if (item === 0) continue;
 
-    pushStack(item);
+    addItem(item);
   }
 
   return result;
 
-  function pushStack(item) {
-    if (stack.length > 0 && stack[stack.length - 1] === item) {
-      stack.pop();
-
-      result += 2;
-    } else stack.push(item);
-  }
-
   function getItem(row, col) {
-    for (; row < board.length; row += 1) {
+    while (row < board.length) {
       if (board[row][col] > 0) {
         const item = board[row][col];
 
-        setBoard(row, col, 0);
+        board[row][col] = 0;
 
         return item;
       }
+
+      row += 1;
     }
 
     return 0;
   }
 
-  function setBoard(row, col, value) {
-    board[row][col] = value;
-  }
+  function addItem(item) {
+    if (bucket.length > 0 && bucket[bucket.length - 1] === item) {
+      bucket.pop();
 
-  function isEmpty(item) {
-    if (item === 0) return true;
-
-    return false;
+      result += 2;
+    } else bucket.push(item);
   }
 }
