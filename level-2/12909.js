@@ -1,12 +1,12 @@
-function solution(s) {
-  let o = 0;
-  let c = 0;
+function solution(str) {
+  let open = 0;
+  let close = 0;
 
-  for (const v of s) {
-    v === "(" ? (o += 1) : (c += 1);
+  for (const bracket of str) {
+    bracket === "(" ? (open += 1) : (close += 1);
 
-    if (o < c) return false;
+    if (open < close) return false; // detect
   }
 
-  return o === c;
+  return open === close;
 }

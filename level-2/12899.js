@@ -1,26 +1,25 @@
-// wip
-function solution(n) {
-  let r = "";
-  const T = ["4", "1", "2"]; // [0 1 2]
+// f(1) -> 1
+// f(2) -> 2
+// f(3) -> 4
+// f(4) -> 11: 3*3 + f(1)
+//      -> 3: 3*0 + f(3)
+//      -> 0: f(3) + f(1) break
 
-  let _n = 0;
-  while (n) {
-    _n = n % 3;
+function solution(N) {
+  const enumTable = ["4", "1", "2"];
 
-    n = (n / 3) << 0;
-
-    if (_n === 0) n -= 1; // 6 -> 2 -> *1
-
-    r = T[_n] + r; // unshift
-  }
-
-  return r;
-}
-
-function _solution(n) {
   let result = "";
 
-  let ternary = [...n.toString(3)].map((value) => +value);
-}
+  let n = 0;
+  while (N) {
+    n = N % 3;
 
-console.log(_solution(9));
+    N = (N / 3) << 0;
+
+    if (n === 0) N -= 1;
+
+    result = enumTable[n] + result;
+  }
+
+  return result;
+}
