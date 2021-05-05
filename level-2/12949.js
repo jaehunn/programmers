@@ -1,15 +1,17 @@
-function solution(arr1, arr2) {
-  let m = arr1.length;
-  let n = arr2[0].length;
+function solution(A, B) {
+  let M = A.length;
+  let N = B[0].length;
 
-  // (m x p) x (p x n) = m x n
-  let res = Array(m)
-    .fill(0)
-    .map((r, i) =>
-      Array(n)
+  // M x N = (M x P) x (P x N)
+  const result = new Array(M)
+    .fill(null)
+    .map((_, rowIndex) =>
+      new Array(N)
         .fill(0)
-        .map((c, j) => arr1[i].reduce((a, c, k) => a + c * arr2[k][j], 0))
+        .map((_, colIndex) =>
+          A[rowIndex].reduce((accResultItem, aItem, rowIndex) => accResultItem + aItem * B[rowIndex][colIndex], 0)
+        )
     );
 
-  return res;
+  return result;
 }

@@ -1,20 +1,11 @@
 function solution(A, B) {
-  A.sort((a, b) => a - b);
-  B.sort((a, b) => b - a);
+  A.sort((a, b) => a - b); // ascending
+  B.sort((a, b) => b - a); // descending
 
-  let r = 0;
-  let i = 0;
-  while (i < A.length) {
-    r += A[i] * B[i];
-
-    i += 1;
+  let result = 0;
+  for (let i = 0; i < A.length; i += 1) {
+    result += A[i] * B[i];
   }
 
-  return r;
+  return result;
 }
-
-// [1, 4, 2] [5, 4, 4]
-// 1x5 + 4x4 + 2x4
-
-// [1, 2] [3, 4]
-// 1x4 + 2x3

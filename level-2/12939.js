@@ -1,7 +1,5 @@
-function solution(s) {
-  let _s = s.split(" ");
+function solution(str) {
+  const items = str.split(" ").sort((a, b) => a - b);
 
-  _s.sort((a, b) => a - b);
-
-  return [_s[0], _s[_s.length - 1]].join(" ");
+  return [items[0], items[items.length - 1]].join(" ");
 }

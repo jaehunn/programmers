@@ -1,18 +1,23 @@
+// wip
 function solution(n) {
-  let r = 0;
+  let validCount = 0;
 
   for (let i = 1; i <= n; i += 1) {
-    r += helper(n, i);
+    validCount += isValid(n, i) ? 1 : 0;
   }
 
-  return r;
+  return validCount;
 }
 
-function helper(n, s) {
-  if (n === 0) return 1;
-  if (n < 0) return 0;
+function isValid(currentN, startN) {
+  if (currentN === 0) return true;
+  if (currentN < 0) return false;
 
-  return helper(n - s, s + 1);
+  return isValid(currentN - startN, startN + 1);
+}
+
+function getValidNumber() {
+  // ...
 }
 
 // 결과가 홀수인 약수?!

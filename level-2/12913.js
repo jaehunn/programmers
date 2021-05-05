@@ -1,25 +1,26 @@
+// wip
 function solution(land) {
   for (let i = 1; i < land.length; i += 1) {
-    land[i] = max(land[i - 1], land[i]);
+    land[i] = getMaxLand(land[i - 1], land[i]); // update
   }
 
   return Math.max(...land[land.length - 1]);
 }
 
-function max(l1, l2) {
-  let r = [];
+function getMaxLand(prevLand, currLand) {
+  let currLandMaxCols = [];
 
-  let c = [];
-  for (let i = 0; i < l2.length; i += 1) {
-    for (let j = 0; j < l1.length; j += 1) {
-      if (i === j) continue;
+  let currLandCols = [];
+  for (let currLandCol = 0; currLandCol < currLand.length; currLandCol += 1) {
+    for (let prevLandCol = 0; prevLandCol < prevLand.length; prevLandCol += 1) {
+      if (currLandCol === prevLandCol) continue;
 
-      c.push(l2[i] + l1[j]);
+      currLandCols.push(currLand[currLandCol] + prevLand[prevLandCol]);
     }
 
-    r.push(Math.max(...c));
-    c = []; // reset
+    currLandMaxCols.push(Math.max(...currLandCols));
+    currLandCols = []; // reset
   }
 
-  return r;
+  return currLandMaxCols;
 }
