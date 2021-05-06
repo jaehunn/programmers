@@ -1,21 +1,23 @@
 function solution(nums) {
-  return combination(nums, 3).filter((v) => isPrime(v)).length;
+  return combination(nums, 3) // get combination sets
+    .map((set) => set.reduce((sum, num) => sum + num, 0)) // get sum each set
+    .filter((num) => isPrime(num)).length; // filter prime -> count
 }
 
-function combination(items, l) {
-  if (l === 1) return items.map((item) => [item]);
+function combination(items, len) {
+  if (len === 1) return items.map((item) => [item]);
 
-  let r = [];
+  const result = [];
 
-  items.forEach((item, i) => {
-    let smallers = combination(items.slice(i + 1), l - 1);
+  items.forEach((item, index) => {
+    const smallers = combination(items.slice(index + 1), len - 1);
 
     smallers.forEach((smaller) => {
-      r.push([item].concat(smaller));
+      result.push([item].concat(smaller));
     });
   });
 
-  return r.map((vs) => vs.reduce((t, v) => t + v, 0));
+  return result;
 }
 
 function isPrime(n) {

@@ -1,16 +1,20 @@
-function solution(s) {
-  if (s.length === 1 && isNaN(+s)) return s.toUpperCase();
+function solution(str) {
+  if (str.length === 1 && typeof str === "string") return str.toUpperCase();
 
-  return s
+  return str
     .split(" ")
-    .map((s, i) => {
-      let _s = "";
+    .map((word) => {
+      let newWord = "";
 
-      s.split("").forEach((c, i) => {
-        _s += i === 0 && isNaN(+c) ? c.toUpperCase() : isNaN(+c) ? c.toLowerCase() : (_s += c);
-      });
+      for (let index = 0; index < word.length; index += 1) {
+        const letter = word[index];
 
-      return _s;
+        if (typeof letter === "string") {
+          newWord += index === 0 ? letter.toUpperCase() : letter.toLowerCase();
+        } else newWord += letter;
+      }
+
+      return newWord;
     })
     .join(" ");
 }

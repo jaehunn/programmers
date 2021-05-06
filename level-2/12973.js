@@ -1,10 +1,10 @@
-function solution(s) {
-  let stk = [];
+function solution(word) {
+  const stk = [];
 
-  for (let c of s) {
-    if (stk[stk.length - 1] === c) stk.pop();
-    else stk.push(c);
+  for (const letter of word) {
+    if (stk[stk.length - 1] === letter) stk.pop();
+    else stk.push(letter);
   }
 
-  return stk.length ? 0 : 1;
+  return stk.length === 0 ? 1 : 0;
 }
