@@ -20,13 +20,13 @@ function combination(items, len) {
   return result;
 }
 
-function isPrime(n) {
-  if (n === 1) return false;
-  if (n === 2 || n === 3) return true;
-  if (!(n % 2)) return false; // even
+function isPrime(num) {
+  if (num === 1) return false;
+  if (num === 2 || num === 3) return true;
+  if (num % 2 === 0) return false; // even number
 
-  for (let d = 3; d <= Math.sqrt(n); d += 2) {
-    if (!(n % d)) return false;
+  for (let division = 3; division <= Math.sqrt(num); division += 2) {
+    if (num % division === 0) return false; // from pow num
   }
 
   return true;
